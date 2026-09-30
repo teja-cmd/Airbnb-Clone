@@ -1,0 +1,14 @@
+.laurel-wreath {
+  display: block;
+  flex: 0 0 auto;
+  color: var(--text-primary);
+  overflow: visible;
+}
+
+.laurel-wreath--white {
+  color: #ffffff;
+}
+
+.laurel-wreath--black {
+  color: #222222;
+}

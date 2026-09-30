@@ -1,0 +1,181 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" font-family="Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#4a5568" />
+    </marker>
+    <style>
+      .box { fill: #ffffff; stroke: #cbd5e0; stroke-width: 1.5; rx: 10; }
+      .box-accent { fill: #fff5f5; stroke: #ff385c; stroke-width: 1.5; rx: 10; }
+      .box-infra { fill: #f0f9f4; stroke: #2f855a; stroke-width: 1.5; rx: 10; }
+      .box-data { fill: #ebf4ff; stroke: #3182ce; stroke-width: 1.5; rx: 10; }
+      .title { font-size: 15px; font-weight: 700; fill: #1a202c; }
+      .label { font-size: 12px; fill: #4a5568; }
+      .section-title { font-size: 17px; font-weight: 700; fill: #1a202c; }
+      .conn { stroke: #4a5568; stroke-width: 1.5; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1200" height="1500" fill="#fafafa"/>
+  <text x="40" y="42" font-size="24" font-weight="700" fill="#ff385c">Vacation Rental Marketplace — Production Architecture</text>
+  <text x="40" y="66" class="label">High-level scaling view for a production-scale Airbnb-style platform</text>
+
+  <!-- Users -->
+  <rect x="500" y="100" width="200" height="56" class="box" rx="10"/>
+  <text x="600" y="133" text-anchor="middle" class="title">Users (Web / Mobile)</text>
+
+  <line x1="600" y1="156" x2="600" y2="196" class="conn"/>
+
+  <!-- CDN / Edge -->
+  <rect x="480" y="198" width="240" height="56" class="box-infra" rx="10"/>
+  <text x="600" y="222" text-anchor="middle" class="title">CDN / Edge Network</text>
+  <text x="600" y="240" text-anchor="middle" class="label">Static assets, image delivery, edge caching</text>
+
+  <line x1="600" y1="254" x2="600" y2="294" class="conn"/>
+
+  <!-- Frontend -->
+  <rect x="460" y="296" width="280" height="56" class="box-accent" rx="10"/>
+  <text x="600" y="320" text-anchor="middle" class="title">Frontend (React) — Load Balanced</text>
+  <text x="600" y="338" text-anchor="middle" class="label">Horizontally scaled, stateless, SSR/CSR hybrid</text>
+
+  <line x1="600" y1="352" x2="600" y2="392" class="conn"/>
+
+  <!-- API Gateway -->
+  <rect x="450" y="394" width="300" height="56" class="box" rx="10"/>
+  <text x="600" y="418" text-anchor="middle" class="title">API Gateway / Load Balancer</text>
+  <text x="600" y="436" text-anchor="middle" class="label">AuthN, rate limiting, routing, TLS termination</text>
+
+  <line x1="600" y1="450" x2="600" y2="486" class="conn"/>
+
+  <text x="600" y="510" text-anchor="middle" class="section-title">Backend Services (stateless, independently scalable)</text>
+
+  <!-- Backend services row -->
+  <g>
+    <rect x="40"  y="530" width="150" height="70" class="box" rx="10"/>
+    <text x="115" y="560" text-anchor="middle" class="title" font-size="13">Listing</text>
+    <text x="115" y="578" text-anchor="middle" class="label">Service</text>
+
+    <rect x="205" y="530" width="150" height="70" class="box" rx="10"/>
+    <text x="280" y="560" text-anchor="middle" class="title" font-size="13">Search</text>
+    <text x="280" y="578" text-anchor="middle" class="label">Service</text>
+
+    <rect x="370" y="530" width="150" height="70" class="box" rx="10"/>
+    <text x="445" y="560" text-anchor="middle" class="title" font-size="13">Booking</text>
+    <text x="445" y="578" text-anchor="middle" class="label">Service</text>
+
+    <rect x="535" y="530" width="150" height="70" class="box" rx="10"/>
+    <text x="610" y="560" text-anchor="middle" class="title" font-size="13">User</text>
+    <text x="610" y="578" text-anchor="middle" class="label">Service</text>
+
+    <rect x="700" y="530" width="150" height="70" class="box" rx="10"/>
+    <text x="775" y="560" text-anchor="middle" class="title" font-size="13">Review</text>
+    <text x="775" y="578" text-anchor="middle" class="label">Service</text>
+
+    <rect x="865" y="530" width="150" height="70" class="box" rx="10"/>
+    <text x="940" y="560" text-anchor="middle" class="title" font-size="13">Payment</text>
+    <text x="940" y="578" text-anchor="middle" class="label">Service</text>
+
+    <rect x="1030" y="530" width="140" height="70" class="box" rx="10"/>
+    <text x="1100" y="560" text-anchor="middle" class="title" font-size="12">Notification</text>
+    <text x="1100" y="578" text-anchor="middle" class="label">Service</text>
+  </g>
+
+  <line x1="600" y1="450" x2="115" y2="530" class="conn"/>
+  <line x1="600" y1="450" x2="280" y2="530" class="conn"/>
+  <line x1="600" y1="450" x2="445" y2="530" class="conn"/>
+  <line x1="600" y1="450" x2="610" y2="530" class="conn"/>
+  <line x1="600" y1="450" x2="775" y2="530" class="conn"/>
+  <line x1="600" y1="450" x2="940" y2="530" class="conn"/>
+  <line x1="600" y1="450" x2="1100" y2="530" class="conn"/>
+
+  <!-- Message queue -->
+  <rect x="430" y="640" width="340" height="56" class="box-accent" rx="10"/>
+  <text x="600" y="664" text-anchor="middle" class="title">Async Event Bus / Message Queue</text>
+  <text x="600" y="682" text-anchor="middle" class="label">Booking events, notifications, review processing</text>
+
+  <line x1="115" y1="600" x2="500" y2="640" class="conn"/>
+  <line x1="445" y1="600" x2="550" y2="640" class="conn"/>
+  <line x1="940" y1="600" x2="700" y2="640" class="conn"/>
+  <line x1="1100" y1="600" x2="750" y2="640" class="conn"/>
+
+  <text x="600" y="748" text-anchor="middle" class="section-title">Data &amp; Storage Layer</text>
+
+  <!-- Storage row -->
+  <rect x="60"  y="770" width="220" height="70" class="box-data" rx="10"/>
+  <text x="170" y="800" text-anchor="middle" class="title" font-size="13">PostgreSQL (Primary)</text>
+  <text x="170" y="818" text-anchor="middle" class="label">+ read replicas</text>
+
+  <rect x="310" y="770" width="200" height="70" class="box-data" rx="10"/>
+  <text x="410" y="800" text-anchor="middle" class="title" font-size="13">Redis Cache</text>
+  <text x="410" y="818" text-anchor="middle" class="label">Sessions, hot listings</text>
+
+  <rect x="540" y="770" width="220" height="70" class="box-data" rx="10"/>
+  <text x="650" y="800" text-anchor="middle" class="title" font-size="13">Search Index</text>
+  <text x="650" y="818" text-anchor="middle" class="label">Elasticsearch / OpenSearch</text>
+
+  <rect x="790" y="770" width="220" height="70" class="box-data" rx="10"/>
+  <text x="900" y="800" text-anchor="middle" class="title" font-size="13">Object Storage</text>
+  <text x="900" y="818" text-anchor="middle" class="label">Images, docs (S3-compatible)</text>
+
+  <line x1="115" y1="600" x2="170" y2="770" class="conn"/>
+  <line x1="280" y1="600" x2="650" y2="770" class="conn"/>
+  <line x1="445" y1="600" x2="410" y2="770" class="conn"/>
+  <line x1="775" y1="600" x2="170" y2="770" class="conn"/>
+  <line x1="900" y1="770" x2="720" y2="352" class="conn"/>
+
+  <text x="600" y="900" text-anchor="middle" class="section-title">Cross-Cutting Infrastructure</text>
+
+  <rect x="80" y="920" width="260" height="60" class="box-infra" rx="10"/>
+  <text x="210" y="946" text-anchor="middle" class="title" font-size="13">Containerized Deploys</text>
+  <text x="210" y="964" text-anchor="middle" class="label">Kubernetes / ECS, auto-scaling</text>
+
+  <rect x="370" y="920" width="220" height="60" class="box-infra" rx="10"/>
+  <text x="480" y="946" text-anchor="middle" class="title" font-size="13">Observability</text>
+  <text x="480" y="964" text-anchor="middle" class="label">Logs, metrics, tracing, alerts</text>
+
+  <rect x="620" y="920" width="220" height="60" class="box-infra" rx="10"/>
+  <text x="730" y="946" text-anchor="middle" class="title" font-size="13">CI / CD</text>
+  <text x="730" y="964" text-anchor="middle" class="label">Automated build, test, deploy</text>
+
+  <rect x="870" y="920" width="240" height="60" class="box-infra" rx="10"/>
+  <text x="990" y="946" text-anchor="middle" class="title" font-size="13">Security &amp; Secrets</text>
+  <text x="990" y="964" text-anchor="middle" class="label">WAF, secrets manager, IAM</text>
+
+  <!-- Scaling notes -->
+  <rect x="40" y="1020" width="1120" height="440" class="box" rx="12"/>
+  <text x="60" y="1054" class="section-title">Scaling Strategy</text>
+
+  <text x="60" y="1090" class="title" font-size="14">Frontend</text>
+  <text x="60" y="1112" class="label">• Stateless React app served behind a CDN with edge caching for static assets.</text>
+  <text x="60" y="1132" class="label">• Horizontally scaled behind a load balancer; auto-scales on request volume / CPU.</text>
+
+  <text x="60" y="1168" class="title" font-size="14">Backend</text>
+  <text x="60" y="1190" class="label">• Each domain service (Listing, Search, Booking, User, Review, Payment, Notification) is</text>
+  <text x="60" y="1208" class="label">  independently deployable and stateless, so it scales horizontally on its own.</text>
+  <text x="60" y="1226" class="label">• Services communicate synchronously via the API Gateway for reads, and asynchronously</text>
+  <text x="60" y="1244" class="label">  via the event bus for writes that fan out (booking confirmed → notify, index, invoice).</text>
+
+  <text x="60" y="1280" class="title" font-size="14">Database</text>
+  <text x="60" y="1302" class="label">• PostgreSQL primary handles writes; read replicas absorb read-heavy traffic (listing</text>
+  <text x="60" y="1320" class="label">  browsing, profile views). Sharding by region/listing-id as write volume grows.</text>
+
+  <text x="60" y="1356" class="title" font-size="14">Caching &amp; Search</text>
+  <text x="60" y="1378" class="label">• Redis caches hot listings, session data, and rate-limit counters to cut DB load.</text>
+  <text x="60" y="1396" class="label">• A dedicated search index (Elasticsearch/OpenSearch) serves geo + text + filter</text>
+  <text x="60" y="1414" class="label">  queries without hitting the relational database directly.</text>
+
+  <text x="620" y="1090" class="title" font-size="14">Media &amp; CDN</text>
+  <text x="620" y="1112" class="label">• Listing photos live in object storage, fronted by the CDN with responsive,</text>
+  <text x="620" y="1130" class="label">  pre-generated image variants for fast, deterministic rendering.</text>
+
+  <text x="620" y="1166" class="title" font-size="14">Async / Events</text>
+  <text x="620" y="1188" class="label">• A message queue decouples booking, payment, and notification flows so a spike</text>
+  <text x="620" y="1206" class="label">  in one service doesn't cascade into the others.</text>
+
+  <text x="620" y="1242" class="title" font-size="14">Observability</text>
+  <text x="620" y="1264" class="label">• Centralized logs/metrics/traces across every service, with alerting on error-rate</text>
+  <text x="620" y="1282" class="label">  and latency SLOs, so scaling decisions are data-driven.</text>
+
+  <text x="620" y="1318" class="title" font-size="14">Deployment</text>
+  <text x="620" y="1340" class="label">• Services run in containers on an orchestrator with rolling deploys and health</text>
+  <text x="620" y="1358" class="label">  checks, enabling zero-downtime releases and independent per-service scaling.</text>
+</svg>
